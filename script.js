@@ -153,4 +153,114 @@ style.textContent = `
         transform: translateY(0);
     }
 `;
-document.head.appendChild(style); 
+document.head.appendChild(style);
+
+// AI Chatbot Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const chatButton = document.getElementById('chat-button');
+    const chatWindow = document.getElementById('chat-window');
+    const closeChat = document.getElementById('close-chat');
+    const chatInput = document.getElementById('chat-input');
+    const sendMessage = document.getElementById('send-message');
+    const chatMessages = document.getElementById('chat-messages');
+
+    // Toggle chat window
+    chatButton.addEventListener('click', () => {
+        chatWindow.classList.remove('hidden');
+        chatButton.classList.add('hidden');
+        chatInput.focus();
+    });
+
+    closeChat.addEventListener('click', () => {
+        chatWindow.classList.add('hidden');
+        chatButton.classList.remove('hidden');
+    });
+
+    // Send message function
+    function sendChatMessage() {
+        const message = chatInput.value.trim();
+        if (message === '') return;
+
+        // Add user message
+        addMessage(message, 'user');
+        chatInput.value = '';
+
+        // Simulate AI response (you can replace this with actual AI integration)
+        setTimeout(() => {
+            const aiResponse = generateAIResponse(message);
+            addMessage(aiResponse, 'ai');
+        }, 1000);
+    }
+
+    // Add message to chat
+    function addMessage(text, sender) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'flex items-start space-x-2';
+        
+        if (sender === 'user') {
+            messageDiv.innerHTML = `
+                <div class="flex-1"></div>
+                <div class="bg-chat-accent text-white rounded-lg p-3 max-w-xs">
+                    <p class="text-sm">${text}</p>
+                </div>
+                <div class="bg-gray-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm">
+                    <i class="fas fa-user"></i>
+                </div>
+            `;
+        } else {
+            messageDiv.innerHTML = `
+                <div class="bg-chat-accent text-white rounded-full w-8 h-8 flex items-center justify-center text-sm">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="bg-chat-border text-chat-text rounded-lg p-3 max-w-xs">
+                    <p class="text-sm">${text}</p>
+                </div>
+            `;
+        }
+        
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Generate AI response (simplified - replace with actual AI integration)
+    function generateAIResponse(userMessage) {
+        const responses = {
+            'hello': 'Hello! How can I help you with your web development needs today?',
+            'hi': 'Hi there! I\'m here to help you with any questions about web development or this portfolio.',
+            'help': 'I can help you with questions about web development, this portfolio, or connecting with Caprise for freelance work.',
+            'contact': 'You can contact Caprise at brockcaprise@gmail.com or book a call through the "Book a Call" section.',
+            'services': 'Caprise offers freelance web development services including HTML, CSS, and responsive website creation.',
+            'portfolio': 'This portfolio showcases Caprise\'s work as a beginner developer learning HTML, CSS, GitHub, and AI tools.',
+            'pricing': 'For pricing information, please contact Caprise directly at brockcaprise@gmail.com or book a consultation call.',
+            'experience': 'Caprise is a beginner developer currently learning HTML, CSS, GitHub, and AI tools for freelance work.',
+            'skills': 'Current skills include HTML5, CSS3, responsive design, Git & GitHub, and various AI development tools.',
+            'projects': 'Check out the Projects section to see examples of Caprise\'s work and web development projects.'
+        };
+
+        const lowerMessage = userMessage.toLowerCase();
+        
+        for (const [key, response] of Object.entries(responses)) {
+            if (lowerMessage.includes(key)) {
+                return response;
+            }
+        }
+
+        return 'Thanks for your message! I\'m here to help with any questions about web development or this portfolio. You can also contact Caprise directly at brockcaprise@gmail.com for specific inquiries.';
+    }
+
+    // Event listeners for sending messages
+    sendMessage.addEventListener('click', sendChatMessage);
+    chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            sendChatMessage();
+        }
+    });
+
+    // Close chat when clicking outside (optional)
+    document.addEventListener('click', (e) => {
+        if (!chatButton.contains(e.target) && !chatWindow.contains(e.target)) {
+            // Uncomment the next line if you want to close chat when clicking outside
+            // chatWindow.classList.add('hidden'); chatButton.classList.remove('hidden');
+        }
+    });
+}); 
