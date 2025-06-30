@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
         Caprise is a beginner developer learning HTML, CSS, GitHub, and AI tools for freelance work.
         
         Key information about Caprise:
-        - Email: brockcaprise@gmail.com
+        - Email: ${process.env.NEXT_PUBLIC_CONTACT_EMAIL}
         - Services: Freelance web development, HTML/CSS, responsive design
         - Experience: Beginner developer, learning and growing
         - Available for: Freelance web projects
