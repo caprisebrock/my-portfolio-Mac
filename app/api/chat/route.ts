@@ -47,18 +47,13 @@ export async function POST(request: NextRequest) {
     const messages = [
       {
         role: 'system' as const,
-        content: `You are a helpful AI assistant for Caprise Brock's portfolio website. 
-        Caprise is a beginner developer learning HTML, CSS, GitHub, and AI tools for freelance work.
-        
-        Key information about Caprise:
-        - Email: ${process.env.NEXT_PUBLIC_CONTACT_EMAIL}
-        - Services: Freelance web development, HTML/CSS, responsive design
-        - Experience: Beginner developer, learning and growing
-        - Available for: Freelance web projects
-        - Location: Remote/Worldwide
-        
-        Be helpful, professional, and encourage visitors to contact Caprise for freelance opportunities.
-        Keep responses concise but informative.`
+        content: `You are an AI assistant on Caprise Brock's portfolio website. Answer questions about:
+- her projects, skills, and technologies she uses (TypeScript, React, TailwindCSS, Next.js)
+- her personal background (she is a junior developer passionate about building clean, creative web apps)
+- her career goals (she wants to freelance, work with startups, and continue learning advanced tools)
+- the freelance services she offers (website building, portfolio design, basic AI integration)
+
+Be helpful, concise, and friendly. If the question is off-topic, politely redirect to relevant topics.`
       },
       ...conversationHistory,
       {
@@ -69,7 +64,7 @@ export async function POST(request: NextRequest) {
 
     // Call OpenAI API
     const completion = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
+      model: 'gpt-4',
       messages: messages,
       max_tokens: 300,
       temperature: 0.7,

@@ -7,10 +7,17 @@ interface Message {
     content: string;
 }
 
+const starterQuestions = [
+    'What kind of freelance work does Caprise do?',
+    'What projects has she built?',
+    'What are her long-term goals?'
+];
+
 export default function ChatWindow() {
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<Message[]>([]);
     const [inputMessage, setInputMessage] = useState('');
+    const [loading, setLoading] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
     const scrollToBottom = () => {
@@ -19,33 +26,38 @@ export default function ChatWindow() {
 
     useEffect(() => {
         scrollToBottom();
-    }, [messages]);
+    }, [messages, isOpen]);
 
     const handleSendMessage = async () => {
-        if (!inputMessage.trim()) return;
-
-        // Add user message
-        setMessages(prev => [...prev, { type: 'user', content: inputMessage.trim() }]);
+        if (!inputMessage.trim() || loading) return;
+        const userMessage = inputMessage.trim();
+        setMessages(prev => [...prev, { type: 'user', content: userMessage }]);
         setInputMessage('');
-
+        setLoading(true);
         try {
-            // Send to API and get response
             const response = await fetch('/api/chat', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ message: inputMessage }),
+                body: JSON.stringify({ 
+                    message: userMessage,
+                    conversationHistory: messages.map(m => ({
+                        role: m.type === 'user' ? 'user' : 'assistant',
+                        content: m.content
+                    }))
+                }),
             });
-
             const data = await response.json();
-
-            // Add AI response
-            setMessages(prev => [...prev, { type: 'ai', content: data.response }]);
+            if (data.error) {
+                setMessages(prev => [...prev, { type: 'ai', content: data.error }]);
+            } else {
+                setMessages(prev => [...prev, { type: 'ai', content: data.message }]);
+            }
         } catch (error) {
-            console.error('Error sending message:', error);
-            // Optionally add error message to chat
             setMessages(prev => [...prev, { type: 'ai', content: 'Sorry, I encountered an error. Please try again.' }]);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -56,25 +68,31 @@ export default function ChatWindow() {
         }
     };
 
+    const handleStarterClick = (q: string) => {
+        setInputMessage(q);
+        setIsOpen(true);
+    };
+
     return (
         <>
             {/* Chat Button */}
             <button
                 onClick={() => setIsOpen(true)}
-                className={`fixed bottom-4 right-4 bg-chat-accent text-white rounded-full p-4 shadow-lg ${isOpen ? 'hidden' : ''}`}
+                className={`fixed bottom-4 right-4 bg-black text-white rounded-full p-4 shadow-lg z-50 ${isOpen ? 'hidden' : ''}`}
                 aria-label="Open chat"
             >
                 <i className="fas fa-comments text-2xl"></i>
             </button>
 
             {/* Chat Window */}
-            <div className={`fixed bottom-4 right-4 w-96 bg-white rounded-lg shadow-xl ${!isOpen ? 'hidden' : ''}`}>
+            <div className={`fixed bottom-4 right-4 w-full max-w-md bg-zinc-900 rounded-xl shadow-2xl border border-zinc-800 z-50 transition-all duration-300 ${!isOpen ? 'hidden' : ''}`}
+                style={{ minHeight: 480, maxHeight: 600, display: 'flex', flexDirection: 'column' }}>
                 {/* Header */}
-                <div className="flex justify-between items-center p-4 bg-chat-accent text-white rounded-t-lg">
-                    <h3 className="font-semibold">Chat with Me</h3>
+                <div className="flex justify-between items-center p-4 bg-zinc-950 text-white rounded-t-xl border-b border-zinc-800">
+                    <h3 className="font-semibold text-lg">AI Chatbot</h3>
                     <button
                         onClick={() => setIsOpen(false)}
-                        className="text-white hover:text-gray-200"
+                        className="text-white hover:text-zinc-400"
                         aria-label="Close chat"
                     >
                         <i className="fas fa-times"></i>
@@ -82,35 +100,43 @@ export default function ChatWindow() {
                 </div>
 
                 {/* Messages */}
-                <div className="h-96 overflow-y-auto p-4 space-y-4">
+                <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-zinc-900" style={{ minHeight: 0 }}>
+                    {messages.length === 0 && (
+                        <div className="text-zinc-400 text-center mt-8">Ask me anything about Caprise or her work!</div>
+                    )}
                     {messages.map((message, index) => (
                         <div
                             key={index}
-                            className={`flex items-start space-x-2 ${
-                                message.type === 'user' ? 'justify-end' : ''
-                            }`}
+                            className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
                         >
                             {message.type === 'ai' && (
-                                <div className="bg-chat-accent text-white rounded-full w-8 h-8 flex items-center justify-center">
+                                <div className="bg-zinc-800 text-white rounded-full w-8 h-8 flex items-center justify-center mr-2">
                                     <i className="fas fa-robot"></i>
                                 </div>
                             )}
                             <div
-                                className={`rounded-lg p-3 max-w-xs ${
+                                className={`rounded-lg p-3 max-w-xs text-sm break-words shadow ${
                                     message.type === 'user'
-                                        ? 'bg-chat-accent text-white'
-                                        : 'bg-chat-border text-chat-text'
+                                        ? 'bg-blue-600 text-white ml-auto'
+                                        : 'bg-zinc-800 text-zinc-100'
                                 }`}
                             >
-                                <p className="text-sm">{message.content}</p>
+                                {message.content}
                             </div>
                         </div>
                     ))}
+                    {loading && (
+                        <div className="flex justify-start">
+                            <div className="rounded-lg p-3 max-w-xs text-sm bg-zinc-800 text-zinc-400 animate-pulse">
+                                Thinking...
+                            </div>
+                        </div>
+                    )}
                     <div ref={messagesEndRef} />
                 </div>
 
                 {/* Input */}
-                <div className="p-4 border-t">
+                <div className="p-4 border-t border-zinc-800 bg-zinc-950">
                     <div className="flex space-x-2">
                         <input
                             type="text"
@@ -118,15 +144,32 @@ export default function ChatWindow() {
                             onChange={(e) => setInputMessage(e.target.value)}
                             onKeyPress={handleKeyPress}
                             placeholder="Type your message..."
-                            className="flex-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-chat-accent"
+                            className="flex-1 p-2 bg-zinc-800 text-white border border-zinc-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                            disabled={loading}
                         />
                         <button
                             onClick={handleSendMessage}
-                            className="bg-chat-accent text-white px-4 py-2 rounded-lg hover:bg-opacity-90"
+                            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-500 disabled:opacity-50"
                             aria-label="Send message"
+                            disabled={loading || !inputMessage.trim()}
                         >
                             <i className="fas fa-paper-plane"></i>
                         </button>
+                    </div>
+                </div>
+                {/* Starter Questions */}
+                <div className="p-4 bg-zinc-900 border-t border-zinc-800 rounded-b-xl">
+                    <div className="text-zinc-400 text-xs mb-2">Try asking:</div>
+                    <div className="flex flex-wrap gap-2">
+                        {starterQuestions.map((q, i) => (
+                            <button
+                                key={i}
+                                onClick={() => handleStarterClick(q)}
+                                className="bg-zinc-800 text-zinc-200 px-3 py-1 rounded-full text-xs hover:bg-blue-600 hover:text-white transition"
+                            >
+                                {q}
+                            </button>
+                        ))}
                     </div>
                 </div>
             </div>
