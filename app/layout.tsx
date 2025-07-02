@@ -1,13 +1,11 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter } from 'next/font/google'
+import { Playfair_Display, Roboto } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
 import NavBar from './components/NavBar'
 
-const inter = Inter({ 
-  subsets: ['latin'],
-  display: 'swap',
-})
+const playfair = Playfair_Display({ subsets: ['latin'], weight: ['400','700'], variable: '--font-heading' });
+const roboto   = Roboto({ subsets: ['latin'],    weight: ['400','700'], variable: '--font-body' });
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -28,12 +26,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={inter.className}>
+    <html lang="en" className={`${playfair.variable} ${roboto.variable}`}>
       <head>
-        <link 
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" 
-          rel="stylesheet"
-        />
         <link 
           rel="stylesheet" 
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -46,14 +40,18 @@ export default function RootLayout({
                 extend: {
                   colors: {
                     // No custom colors, use Tailwind's default black, white, and gray
-                  }
+                  },
+                  fontFamily: {
+                    heading: ['var(--font-heading)', 'serif'],
+                    body:    ['var(--font-body)',    'sans-serif'],
+                  },
                 }
               }
             }
           `}
         </Script>
       </head>
-      <body>
+      <body className="font-body bg-black text-white">
         <NavBar />
         <main className="min-h-screen pt-16">
           {children}

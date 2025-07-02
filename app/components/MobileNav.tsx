@@ -33,7 +33,7 @@ export default function MobileNav() {
     return (
         <nav className="md:hidden w-full bg-gray-900 text-white shadow fixed top-0 left-0 z-40">
             <div className="flex items-center justify-between px-4 py-3">
-                <a href="#home" className="text-lg font-bold">Caprise Brock</a>
+                <a href="#home" className="text-lg font-bold font-heading">Caprise Brock</a>
                 <button
                     className="flex flex-col justify-center items-center w-8 h-8 focus:outline-none"
                     onClick={() => setIsOpen(!isOpen)}
@@ -45,12 +45,12 @@ export default function MobileNav() {
                 </button>
             </div>
             {isOpen && (
-                <ul className="flex flex-col space-y-2 px-4 pb-4">
+                <ul className="flex flex-col space-y-2 px-4 pb-4 bg-black">
                     {navLinks.map((link) => (
                         <li key={link.href}>
                             <a
                                 href={link.href}
-                                className="block py-2 px-2 rounded hover:bg-gray-800 hover:text-blue-500 transition font-bold"
+                                className="block py-2 px-2 rounded hover:bg-gray-800 hover:text-gray-400 transition font-bold text-white font-heading"
                                 onClick={handleClick}
                             >
                                 {link.label}
