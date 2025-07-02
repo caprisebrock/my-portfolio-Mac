@@ -9,7 +9,6 @@ const NavBar = () => {
     <nav className="w-full bg-black text-white shadow-md fixed top-0 left-0 z-50 border-b border-gray-700">
       <div className="max-w-5xl mx-auto px-4 flex items-center justify-between h-16">
         <div className="text-xl font-bold tracking-tight flex items-center gap-2">
-          <span className="text-white"><i className="fas fa-star" /></span>
           <Link href="#home" className="font-bold text-white">Caprise Brock</Link>
         </div>
         <div className="hidden md:flex space-x-8">
