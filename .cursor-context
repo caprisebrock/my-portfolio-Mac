@@ -1,0 +1,107 @@
+# Portfolio Project with AI Chat
+
+## Project Overview
+This is a modern developer portfolio website that showcases my work while incorporating an AI chatbot to interact with visitors. The site focuses on clean design, type safety, and modern React practices.
+
+### Main Goals
+- Create a professional portfolio that highlights my development skills
+- Integrate an AI chatbot for interactive visitor engagement
+- Maintain clean, maintainable code using modern best practices
+- Focus on learning and implementing TypeScript and React patterns
+
+## Tech Stack
+- **Next.js 14** (with App Router) for the framework
+- **TypeScript** for type safety and better development experience
+- **Tailwind CSS** for styling (no custom CSS files)
+- **OpenAI API** for the AI chat functionality
+- **React Hooks** for state management and side effects
+
+## Key Design Decisions
+1. **TypeScript Only**
+   - All code is written in TypeScript (`.ts` or `.tsx`)
+   - No JavaScript files allowed
+   - Strict type checking enabled
+
+2. **React-First Approach**
+   - No direct DOM manipulation
+   - Everything is component-based
+   - Uses React hooks for state and effects
+   - Reusable components in `app/components/`
+
+3. **Styling**
+   - Tailwind CSS for all styling
+   - Styles defined in `app/globals.css`
+   - No custom CSS files or inline styles
+   - Responsive design patterns
+
+4. **Environment & Security**
+   - API keys stored in `.env.local`
+   - Environment examples in `env.example`
+   - Proper `.gitignore` configuration
+   - No sensitive data in repository
+
+## File Structure
+```
+app/
+  ├── components/              # Reusable React components
+  │   ├── ChatWindow.tsx      # AI chat interface component
+  │   └── MobileNav.tsx       # Mobile navigation component
+  ├── api/
+  │   └── chat/
+  │       └── route.ts        # OpenAI API endpoint
+  ├── globals.css             # Tailwind and global styles
+  ├── layout.tsx              # Root layout component
+  └── page.tsx                # Homepage component
+
+# Configuration Files
+.env.local                    # Private environment variables (not in git)
+env.example                   # Example environment setup
+.gitignore                    # Git ignore patterns
+next.config.js               # Next.js configuration
+package.json                 # Project dependencies
+tsconfig.json                # TypeScript configuration
+```
+
+## Development Guidelines
+
+### Do:
+- Write all new code in TypeScript
+- Create reusable React components
+- Use Tailwind CSS for styling
+- Keep components small and focused
+- Follow the existing file structure
+- Add types for all props and data
+- Use React hooks for state/effects
+
+### Don't:
+- Add JavaScript (`.js`) files
+- Use direct DOM manipulation
+- Create custom CSS files
+- Commit API keys or secrets
+- Add deployment configurations
+- Mix different styling approaches
+
+### For Future Changes:
+1. **New Features**
+   - Create components in `app/components/`
+   - Use TypeScript interfaces for props
+   - Follow existing component patterns
+
+2. **Styling**
+   - Add styles using Tailwind classes
+   - Update `globals.css` only for custom Tailwind
+   - Keep responsive design in mind
+
+3. **API Integration**
+   - Add new API routes in `app/api/`
+   - Use environment variables for secrets
+   - Follow existing error handling patterns
+
+## Current Status
+This project is in active development. The focus is on:
+- Learning and implementing TypeScript
+- Building clean, maintainable components
+- Understanding React patterns and hooks
+- Practicing modern web development
+
+The site is not ready for production deployment. The priority is on learning and implementing best practices rather than rushing to host the site. 

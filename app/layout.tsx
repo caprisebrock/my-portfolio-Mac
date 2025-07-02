@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
+import NavBar from './components/NavBar'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -44,10 +45,7 @@ export default function RootLayout({
               theme: {
                 extend: {
                   colors: {
-                    'chat-bg': '#1a1a1a',
-                    'chat-border': '#333333',
-                    'chat-text': '#e5e5e5',
-                    'chat-accent': '#3b82f6'
+                    // No custom colors, use Tailwind's default black, white, and gray
                   }
                 }
               }
@@ -56,7 +54,8 @@ export default function RootLayout({
         </Script>
       </head>
       <body>
-        <main className="min-h-screen">
+        <NavBar />
+        <main className="min-h-screen pt-16">
           {children}
         </main>
       </body>

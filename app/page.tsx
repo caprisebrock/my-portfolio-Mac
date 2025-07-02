@@ -1,26 +1,26 @@
 'use client';
 
 import MobileNav from './components/MobileNav';
-import ChatWindow from './components/ChatWindow';
+import ChatWidget from './components/ChatWidget';
 
 export default function Home() {
   return (
     <>
       <MobileNav />
-      
+
       {/* Home Section */}
-      <section id="home" className="hero">
+      <section id="home" className="hero bg-black">
         <div className="hero-container">
           <div className="hero-content">
-            <h1 className="hero-title">Hi, I'm <span className="highlight">Caprise Brock</span></h1>
-            <p className="hero-subtitle">Full Stack Developer & Designer</p>
-            <p className="hero-description">
+            <h1 className="hero-title text-white">Hi, I'm <span className="highlight text-gold">Caprise Brock</span></h1>
+            <p className="hero-subtitle text-gray-400">Full Stack Developer & Designer</p>
+            <p className="hero-description text-gray-400">
               I'm a developer who turns ideas into websites. 
               Passionate about clean code and innovative solutions.
             </p>
             <div className="hero-buttons">
-              <a href="#projects" className="btn btn-primary">View My Work</a>
-              <a href="#contact" className="btn btn-secondary">Get In Touch</a>
+              <a href="#projects" className="btn btn-primary bg-gray-800 text-white border border-gray-700 hover:bg-gray-700">View My Work</a>
+              <a href="#contact" className="btn btn-secondary bg-gray-800 text-white border border-gray-700 hover:bg-gray-700">Get In Touch</a>
             </div>
           </div>
           <div className="hero-image">
@@ -32,9 +32,9 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="about">
+      <section id="about" className="about bg-black">
         <div className="container">
-          <h2 className="section-title">About Me</h2>
+          <h2 className="section-title text-white">About Me</h2>
           <div className="about-content">
             <div className="about-text">
               <p>
@@ -85,80 +85,51 @@ export default function Home() {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="projects">
-        <div className="container">
-          <h2 className="section-title">My Projects</h2>
-          <div className="projects-grid">
-            <div className="project-card">
-              <div className="project-image">
-                <div className="project-placeholder">
-                  <i className="fas fa-laptop-code"></i>
-                </div>
+      <section id="projects" className="py-16 bg-black">
+        <div className="max-w-5xl mx-auto px-4">
+          <h2 className="text-3xl font-bold text-white mb-10 text-center">Projects</h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Project Card 1 */}
+            <div className="bg-gray-800 rounded-xl shadow-lg p-6 flex flex-col border border-gray-700">
+              <h3 className="text-xl font-bold text-white mb-2">Portfolio Website</h3>
+              <p className="text-gray-400 mb-4">A personal portfolio site to showcase my work, skills, and contact info. Built for speed and mobile-friendliness.</p>
+              <div className="flex flex-wrap gap-2 mb-4">
+                <span className="bg-gray-700 text-xs text-gray-200 px-2 py-1 rounded">Next.js</span>
+                <span className="bg-gray-700 text-xs text-gray-200 px-2 py-1 rounded">Tailwind CSS</span>
+                <span className="bg-gray-700 text-xs text-gray-200 px-2 py-1 rounded">TypeScript</span>
               </div>
-              <div className="project-content">
-                <h3>E-Commerce Platform</h3>
-                <p>A full-stack e-commerce solution with user authentication, payment processing, and admin dashboard.</p>
-                <div className="project-tech">
-                  <span className="tech-tag">React</span>
-                  <span className="tech-tag">Node.js</span>
-                  <span className="tech-tag">MongoDB</span>
-                </div>
-                <div className="project-links">
-                  <a href="#" className="project-link"><i className="fab fa-github"></i> Code</a>
-                  <a href="#" className="project-link"><i className="fas fa-external-link-alt"></i> Live</a>
-                </div>
-              </div>
+              <a href="#" className="mt-auto text-white hover:underline">Learn More</a>
             </div>
-
-            <div className="project-card">
-              <div className="project-image">
-                <div className="project-placeholder">
-                  <i className="fas fa-mobile-alt"></i>
-                </div>
+            {/* Project Card 2 */}
+            <div className="bg-gray-800 rounded-xl shadow-lg p-6 flex flex-col border border-gray-700">
+              <h3 className="text-xl font-bold text-white mb-2">Task Tracker App</h3>
+              <p className="text-gray-400 mb-4">A simple app to manage daily tasks with a clean UI and drag-and-drop features. Great for productivity.</p>
+              <div className="flex flex-wrap gap-2 mb-4">
+                <span className="bg-gray-700 text-xs text-gray-200 px-2 py-1 rounded">React</span>
+                <span className="bg-gray-700 text-xs text-gray-200 px-2 py-1 rounded">Firebase</span>
+                <span className="bg-gray-700 text-xs text-gray-200 px-2 py-1 rounded">CSS3</span>
               </div>
-              <div className="project-content">
-                <h3>Task Management App</h3>
-                <p>A responsive task management application with drag-and-drop functionality and real-time updates.</p>
-                <div className="project-tech">
-                  <span className="tech-tag">Vue.js</span>
-                  <span className="tech-tag">Firebase</span>
-                  <span className="tech-tag">CSS3</span>
-                </div>
-                <div className="project-links">
-                  <a href="#" className="project-link"><i className="fab fa-github"></i> Code</a>
-                  <a href="#" className="project-link"><i className="fas fa-external-link-alt"></i> Live</a>
-                </div>
-              </div>
+              <a href="#" className="mt-auto text-white hover:underline">Learn More</a>
             </div>
-
-            <div className="project-card">
-              <div className="project-image">
-                <div className="project-placeholder">
-                  <i className="fas fa-chart-line"></i>
-                </div>
+            {/* Project Card 3 */}
+            <div className="bg-gray-800 rounded-xl shadow-lg p-6 flex flex-col border border-gray-700">
+              <h3 className="text-xl font-bold text-white mb-2">E-Commerce Demo</h3>
+              <p className="text-gray-400 mb-4">A demo e-commerce platform with product listings, a shopping cart, and secure checkout flow.</p>
+              <div className="flex flex-wrap gap-2 mb-4">
+                <span className="bg-gray-700 text-xs text-gray-200 px-2 py-1 rounded">Vue.js</span>
+                <span className="bg-gray-700 text-xs text-gray-200 px-2 py-1 rounded">Node.js</span>
+                <span className="bg-gray-700 text-xs text-gray-200 px-2 py-1 rounded">MongoDB</span>
               </div>
-              <div className="project-content">
-                <h3>Data Visualization Dashboard</h3>
-                <p>Interactive dashboard for data visualization with charts, filters, and real-time data updates.</p>
-                <div className="project-tech">
-                  <span className="tech-tag">D3.js</span>
-                  <span className="tech-tag">Python</span>
-                  <span className="tech-tag">Flask</span>
-                </div>
-                <div className="project-links">
-                  <a href="#" className="project-link"><i className="fab fa-github"></i> Code</a>
-                  <a href="#" className="project-link"><i className="fas fa-external-link-alt"></i> Live</a>
-                </div>
-              </div>
+              <a href="#" className="mt-auto text-white hover:underline">Learn More</a>
             </div>
           </div>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="contact">
+      <section id="contact" className="contact bg-black">
         <div className="container">
-          <h2 className="section-title">Get In Touch</h2>
+          <h2 className="section-title text-white">Get In Touch</h2>
           <div className="contact-content">
             <div className="contact-info">
               <h3>Let's work together!</h3>
@@ -204,13 +175,13 @@ export default function Home() {
                 <label htmlFor="message">Message</label>
                 <textarea id="message" name="message" rows={5} required></textarea>
               </div>
-              <button type="submit" className="btn btn-primary">Send Message</button>
+              <button type="submit" className="btn btn-primary bg-gray-800 text-white border border-gray-700 hover:bg-gray-700">Send Message</button>
             </form>
           </div>
         </div>
       </section>
 
-      <ChatWindow />
+      <ChatWidget />
     </>
   );
 } 
