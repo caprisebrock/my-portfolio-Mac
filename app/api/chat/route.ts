@@ -76,11 +76,11 @@ export async function POST(request: NextRequest) {
       // Using gpt-3.5-turbo for compatibility with free OpenAI API accounts.
       completion = await openai.chat.completions.create({
         model: 'gpt-3.5-turbo',
-        messages: messages,
-        max_tokens: 300,
-        temperature: 0.7,
-        stream: false,
-      });
+      messages: messages,
+      max_tokens: 300,
+      temperature: 0.7,
+      stream: false,
+    });
     } catch (openaiError: any) {
       // Log and return OpenAI API errors
       console.error('OpenAI API Error:', openaiError);
@@ -166,7 +166,7 @@ export async function DELETE() {
     { error: 'Method not allowed. Use POST to send messages.' },
     { status: 405 }
   );
-}
+} 
 
 // ---
 // Fixes made:

@@ -1,0 +1,22 @@
+[
+  {
+    "slug": "portfolio-website",
+    "title": "Portfolio Website",
+    "shortDescription": "A modern, animated portfolio to showcase my work.",
+    "longDescription": "A fully responsive, monochrome-themed portfolio built with Next.js 14, TypeScript, and Tailwind CSS. Features advanced animations, a chat widget, and dynamic project pages. Designed for accessibility and performance.",
+    "image": "/images/portfolio-website.png",
+    "technologies": ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    "liveUrl": "https://caprisebrock.com",
+    "repoUrl": "https://github.com/caprisebrock/my-portfolio-Mac"
+  },
+  {
+    "slug": "task-tracker-app",
+    "title": "Task Tracker App",
+    "shortDescription": "A productivity app for tracking daily tasks.",
+    "longDescription": "A simple yet powerful task tracker built with React, TypeScript, and Tailwind CSS. Allows users to add, edit, and complete tasks with a clean, minimalist UI.",
+    "image": "/images/task-tracker-app.png",
+    "technologies": ["React", "TypeScript", "Tailwind CSS"],
+    "liveUrl": "https://task-tracker-demo.com",
+    "repoUrl": "https://github.com/caprisebrock/task-tracker-app"
+  }
+] 

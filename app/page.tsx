@@ -2,6 +2,10 @@
 
 import MobileNav from './components/MobileNav';
 import ChatWidget from './components/ChatWidget';
+import { motion } from 'framer-motion';
+import { Tilt } from 'react-tilt';
+import projects from '../data/projects.json';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -32,7 +36,14 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="about bg-black">
+      <motion.section
+        id="about"
+        className="about bg-black"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.7, ease: 'easeOut' }}
+      >
         <div className="container">
           <h2 className="section-title text-white font-heading">About Me</h2>
           <div className="about-content">
@@ -82,52 +93,41 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-16 bg-black">
+      <motion.section
+        id="projects"
+        className="py-16 bg-black"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.7, ease: 'easeOut' }}
+      >
         <div className="max-w-5xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-white mb-10 text-center font-heading">Projects</h2>
           <div className="grid md:grid-cols-3 gap-8">
-            {/* Project Card 1 */}
-            <div className="bg-gray-800 rounded-xl shadow-lg p-6 flex flex-col border border-gray-700">
-              <h3 className="text-xl font-bold text-white mb-2 font-heading">Portfolio Website</h3>
-              <p className="text-gray-400 mb-4 font-body">A personal portfolio site to showcase my work, skills, and contact info. Built for speed and mobile-friendliness.</p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                <span className="bg-gray-700 text-xs text-gray-200 px-2 py-1 rounded">Next.js</span>
-                <span className="bg-gray-700 text-xs text-gray-200 px-2 py-1 rounded">Tailwind CSS</span>
-                <span className="bg-gray-700 text-xs text-gray-200 px-2 py-1 rounded">TypeScript</span>
-              </div>
-              <a href="#" className="mt-auto text-white hover:underline">Learn More</a>
-            </div>
-            {/* Project Card 2 */}
-            <div className="bg-gray-800 rounded-xl shadow-lg p-6 flex flex-col border border-gray-700">
-              <h3 className="text-xl font-bold text-white mb-2 font-heading">Task Tracker App</h3>
-              <p className="text-gray-400 mb-4 font-body">A simple app to manage daily tasks with a clean UI and drag-and-drop features. Great for productivity.</p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                <span className="bg-gray-700 text-xs text-gray-200 px-2 py-1 rounded">React</span>
-                <span className="bg-gray-700 text-xs text-gray-200 px-2 py-1 rounded">Firebase</span>
-                <span className="bg-gray-700 text-xs text-gray-200 px-2 py-1 rounded">CSS3</span>
-              </div>
-              <a href="#" className="mt-auto text-white hover:underline">Learn More</a>
-            </div>
-            {/* Project Card 3 */}
-            <div className="bg-gray-800 rounded-xl shadow-lg p-6 flex flex-col border border-gray-700">
-              <h3 className="text-xl font-bold text-white mb-2 font-heading">E-Commerce Demo</h3>
-              <p className="text-gray-400 mb-4 font-body">A demo e-commerce platform with product listings, a shopping cart, and secure checkout flow.</p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                <span className="bg-gray-700 text-xs text-gray-200 px-2 py-1 rounded">Vue.js</span>
-                <span className="bg-gray-700 text-xs text-gray-200 px-2 py-1 rounded">Node.js</span>
-                <span className="bg-gray-700 text-xs text-gray-200 px-2 py-1 rounded">MongoDB</span>
-              </div>
-              <a href="#" className="mt-auto text-white hover:underline">Learn More</a>
-            </div>
+            {projects.map((project) => (
+              <Link key={project.slug} href={`/projects/${project.slug}`}>
+                <a className="block bg-gray-800 rounded-xl p-6 hover:scale-105 transition">
+                  <h3 className="font-heading text-xl text-white">{project.title}</h3>
+                  <p className="font-body text-gray-400">{project.shortDescription}</p>
+                </a>
+              </Link>
+            ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Contact Section */}
-      <section id="contact" className="contact bg-black">
+      <motion.section
+        id="contact"
+        className="contact bg-black"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.7, ease: 'easeOut' }}
+      >
         <div className="container">
           <h2 className="section-title text-white font-heading">Get In Touch</h2>
           <div className="contact-content">
@@ -179,7 +179,7 @@ export default function Home() {
             </form>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       <ChatWidget />
     </>

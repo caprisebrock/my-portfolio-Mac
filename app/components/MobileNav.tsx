@@ -43,7 +43,7 @@ export default function MobileNav() {
                     <span className={`block w-6 h-0.5 bg-white mb-1 ${isOpen ? 'opacity-0' : ''}`}></span>
                     <span className={`block w-6 h-0.5 bg-white transition-transform ${isOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
                 </button>
-            </div>
+                </div>
             {isOpen && (
                 <ul className="flex flex-col space-y-2 px-4 pb-4 bg-black">
                     {navLinks.map((link) => (
