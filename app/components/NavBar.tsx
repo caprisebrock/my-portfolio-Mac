@@ -15,7 +15,7 @@ const NavBar = () => {
           <Link href="#home" className="font-bold text-white hover:text-gray-400 transition font-heading">Home</Link>
           <Link href="#about" className="font-bold text-white hover:text-gray-400 transition font-heading">About</Link>
           <Link href="#projects" className="font-bold text-white hover:text-gray-400 transition font-heading">Projects</Link>
-          <Link href="#contact" className="font-bold text-white hover:text-gray-400 transition font-heading">Contact</Link>
+          <Link href="/contact" className="font-bold text-white hover:text-gray-400 transition font-heading">Contact</Link>
         </div>
         <button
           className="md:hidden flex items-center px-3 py-2 border rounded text-white border-gray-700 hover:text-gray-400 hover:border-white"
@@ -31,7 +31,7 @@ const NavBar = () => {
           <Link href="#home" className="block font-bold text-white hover:text-gray-400 font-heading" onClick={() => setMenuOpen(false)}>Home</Link>
           <Link href="#about" className="block font-bold text-white hover:text-gray-400 font-heading" onClick={() => setMenuOpen(false)}>About</Link>
           <Link href="#projects" className="block font-bold text-white hover:text-gray-400 font-heading" onClick={() => setMenuOpen(false)}>Projects</Link>
-          <Link href="#contact" className="block font-bold text-white hover:text-gray-400 font-heading" onClick={() => setMenuOpen(false)}>Contact</Link>
+          <Link href="/contact" className="block font-bold text-white hover:text-gray-400 font-heading" onClick={() => setMenuOpen(false)}>Contact</Link>
         </div>
       )}
     </nav>

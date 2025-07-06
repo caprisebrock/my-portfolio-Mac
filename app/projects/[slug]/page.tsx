@@ -38,8 +38,8 @@ export default function ProjectPage({ params }: Params) {
           {project.repoUrl && (
             <a href={project.repoUrl} target="_blank" className="border border-gray-700 hover:bg-gray-700 text-white px-4 py-2 rounded-lg font-body">View Code</a>
           )}
-          <Link href="/">
-            <a className="text-gray-400 hover:text-white font-body ml-auto">← Back to Home</a>
+          <Link href="/" className="text-gray-400 hover:text-white font-body ml-auto">
+            ← Back to Home
           </Link>
         </div>
       </main>
