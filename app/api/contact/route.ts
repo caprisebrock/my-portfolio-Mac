@@ -16,8 +16,8 @@ const transporter = nodemailer.createTransport({
 
 export async function POST(req: Request) {
   try {
-    const body = await req.clone().json()
-    console.log('👉 [contact API] received:', body)
+    const body = await req.clone().json();
+    console.log('👉 [contact API] received:', body);
     const { name, email, subject, message } = body;
     if (!name || !email || !message) {
       return NextResponse.json({ error: 'Missing required fields.' }, { status: 400 });
@@ -42,6 +42,6 @@ export async function POST(req: Request) {
     return NextResponse.json(
       { error: `Failed to send message: ${errorMessage}` },
       { status: 500 }
-    )
+    );
   }
 } 
