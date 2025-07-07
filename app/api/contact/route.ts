@@ -8,6 +8,24 @@ export async function POST(req: Request) {
   const body = await req.json();
   console.log('👉 [contact API] received:', body);
 
+  // Explicit environment variable validation
+  const requiredEnv = [
+    'SMTP_HOST',
+    'SMTP_PORT',
+    'SMTP_USER',
+    'SMTP_PASS',
+    'CONTACT_EMAIL',
+  ];
+  const missing = requiredEnv.filter((key) => !process.env[key]);
+  if (missing.length > 0) {
+    const msg = `❌ [contact API] Missing required env vars: ${missing.join(', ')}`;
+    console.error(msg);
+    return NextResponse.json(
+      { error: msg },
+      { status: 500 }
+    );
+  }
+
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: Number(process.env.SMTP_PORT),
